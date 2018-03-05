@@ -1,4 +1,4 @@
-class MaximumFun::CLI
+class CLI
 
   def call
     
@@ -12,14 +12,14 @@ class MaximumFun::CLI
   	puts "Which podcast would you like to know more about?"
   	input = gets.strip
 
-  	podcast = MaximumFun::Podcast.find(input.to_i)
+  	podcast = Podcast.find(input.to_i)
   	print_podcast(podcast)
 
-  	puts "Would you like to listen to the latest episode? Y/n"
+  	puts "Would you like to visit the show page? Y/n"
   	input = gets.strip.upcase
 
   	if input == "YES" || input == "Y"
-      open(url)
+      open('#{podcast.show_page_url}')
   	elsif input == "NO" || input == "N"
   	  restart
   	elsif input == "EXIT"
@@ -38,10 +38,18 @@ class MaximumFun::CLI
   end   	
 
   def print_podcast_list
-  	MaximumFun::Podcast.all.each.with_index(1) do |podcast, i|
-  		puts "#{i}. #{}{podcast.name} - #{podcast.hosts}"
+  	Podcast.all.each.with_index(1) do |podcast, i|
+  		puts "#{i}. #{podcast.name} - #{podcast.host}"
   	end
   end		
 
+  def print_podcast(podcast)
+    puts "#{podcast.name} - #{podcast.host}"
+    puts "#{podcast.description}"
+    puts ""
+    puts "Here's a description of the latest episode:"
+    puts "#{podcast.latest_episode_title} - #{podcast.latest_episode_description}"
+    puts "Visit the show page at #{podcast.show_page_url}"
+end
 
 end

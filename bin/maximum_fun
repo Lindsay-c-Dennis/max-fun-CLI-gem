@@ -1,6 +1,7 @@
 #!/usr/bin/env ruby
 
-require '../lib/maximumfun'
+require_relative '../config/environment'
 
 
-MaximumFun::CLI.new.call
+CLI.new.call
+
