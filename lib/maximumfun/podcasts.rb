@@ -1,2 +1,0 @@
-class Podcasts
-end
