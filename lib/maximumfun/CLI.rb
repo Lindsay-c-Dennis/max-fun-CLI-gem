@@ -1,3 +1,4 @@
+
 class CLI
 
   def call
@@ -50,6 +51,12 @@ class CLI
     puts "Here's a description of the latest episode:"
     puts "#{podcast.latest_episode_title} - #{podcast.latest_episode_description}"
     puts "Visit the show page at #{podcast.show_page_url}"
-end
+  end
+  
+  def make_podcasts
+  	podcasts_hash = Scraper.scrape_list_page("http://www.maximumfun.org/shows/comedy")
+  	Podcast.create_from_scrape(podcast_hash)
+  end
+
 
 end
