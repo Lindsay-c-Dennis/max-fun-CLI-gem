@@ -1,7 +1,7 @@
 require 'pry'
 
 class Podcast
-  attr_accessor :host, :description, :show_page_url, :title 
+  attr_accessor :host, :description, :show_page_url, :title, :episodes 
   @@all = []
 
   def initialize(podcast_hash)
@@ -39,5 +39,6 @@ class Podcast
   def add_episodes_from_scrape(show_page_url)
     episode_array = Scraper.scrape_show_page(show_page_url) 
     Episode.new_from_episode_list(episode_array)
+    @episodes << self
   end
 end

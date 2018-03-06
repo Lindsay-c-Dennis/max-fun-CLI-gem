@@ -19,8 +19,6 @@ class CLI
   end
 
   def start
-  	puts "Here is a list of recent podcast episodes:"
-  	print_episode_list
   	puts "Here are the current Maximum Fun Comedy podcasts:"
   	print_podcast_list 
   	
@@ -42,19 +40,20 @@ class CLI
   	#end
   #end 
 
-  #def restart
-  #  puts "Would you like to search another podcast? Y/n"
-  #  input = get.strip.upcase 
-  #  if input == "Y" || input == "YES"
-  #    start
-  #  else 
-  #    puts "See ya later!"
-  #  end 
-  #end   	
-  def print_episode_list
-  	Episode.all.each.with_index(1) do |episode, i|
-  		puts "#{i}. #{episode.podcast.title} - #{episode.title}"
-  		puts "#{episode.description}"
+  def restart
+    puts "Would you like to search another podcast? Y/n"
+    input = get.strip.upcase 
+    if input == "Y" || input == "YES"
+      start
+    else 
+      puts "See ya later!"
+    end 
+  end   	
+  
+  def print_episode_list(podcast)
+  	episode_array = Scraper.scrape_show_page(podcast.show_page_url)
+  	episode_array.each do |episode_hash|
+  		episode_hash.each do |key|
   	end
   end
 
@@ -67,10 +66,14 @@ class CLI
   def print_podcast(podcast)
     puts "#{podcast.title} - #{podcast.host}"
     puts "#{podcast.description}"
-    puts "#{podcast.show_page_url}"
-    #puts "Here's a description of the latest episode:"
-    #puts "#{podcast.latest_episode_title} - #{podcast.latest_episode_description}"
-    #puts "Visit the show page at #{podcast.show_page_url}"
+    puts "Visit the show page at #{podcast.show_page_url}"
+    puts "Would you like to see a list of recent episodes? Y/n"
+    input = get.strip.upcase
+    if input == "Y" || input =="YES"
+    	print_episode_list(podcast)
+    elsif input == "N" || input =="NO"
+        restart
+    end	
   end
   
   def make_podcasts
@@ -81,8 +84,8 @@ class CLI
   def make_episodes
     Podcast.all.each do |podcast|
       podcast.add_episodes_from_scrape(podcast.show_page_url)
-      end	
-    end 
+    end	
+  end 
 
 
 end
