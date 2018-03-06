@@ -2,7 +2,7 @@
 class CLI
 
   def call
-    make_podcasts
+  	make_podcasts
     puts "Welcome to the Maximum Fun Comedy Podcast Inventory!"
     start
   end
@@ -47,7 +47,7 @@ class CLI
   def print_podcast(podcast)
     puts "#{podcast.title} - #{podcast.host}"
     puts "#{podcast.description}"
-    puts ""
+    puts "#{podcast.show_page_url}"
     #puts "Here's a description of the latest episode:"
     #puts "#{podcast.latest_episode_title} - #{podcast.latest_episode_description}"
     #puts "Visit the show page at #{podcast.show_page_url}"

@@ -1,5 +1,7 @@
+require 'pry'
+
 class Podcast
-  attr_accessor :title, :host, :description, :show_page_url 
+  attr_accessor :host, :description, :show_page_url, :title 
   @@all = []
 
   def initialize(podcast_hash)
@@ -15,21 +17,13 @@ class Podcast
        @@all << self
     end
   end
-
-  def title=(title)
-  	@title = title
-  end
-
-  def title
-  	@title
-  end
   
   def self.find(input)
     self.all[input - 1]
   end
 
   def self.all
-  	@@all 
+    @@all 
   end
 
 end
