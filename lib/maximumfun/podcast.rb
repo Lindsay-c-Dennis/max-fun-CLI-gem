@@ -8,8 +8,8 @@ class Podcast
   	podcast_hash.each do |key,value|
       self.send("#{key}=", value)
     end
-    @episodes = []
     @@all << self
+    @episodes = []
   end
 
   def self.create_from_scrape(podcast_array)
@@ -36,6 +36,8 @@ class Podcast
     @episodes << episode 
   end
   
-  
-  
+  def add_episodes_from_scrape(show_page_url)
+    episode_array = Scraper.scrape_show_page(show_page_url) 
+    Episode.new_from_episode_list(episode_array)
+  end
 end

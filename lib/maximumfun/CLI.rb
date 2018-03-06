@@ -15,11 +15,12 @@ class CLI
     puts "|                                                                          |"
     puts " \\________________________________________________________________________/ "
                                                                      
-    
     start
   end
 
   def start
+  	puts "Here is a list of recent podcast episodes:"
+  	print_episode_list
   	puts "Here are the current Maximum Fun Comedy podcasts:"
   	print_podcast_list 
   	
@@ -50,6 +51,12 @@ class CLI
   #    puts "See ya later!"
   #  end 
   #end   	
+  def print_episode_list
+  	Episode.all.each.with_index(1) do |episode, i|
+  		puts "#{i}. #{episode.podcast.title} - #{episode.title}"
+  		puts "#{episode.description}"
+  	end
+  end
 
   def print_podcast_list
   	Podcast.all.each.with_index(1) do |podcast, i|
@@ -71,7 +78,11 @@ class CLI
   	Podcast.create_from_scrape(podcast_array)
   end
 
-  
+  def make_episodes
+    Podcast.all.each do |podcast|
+      podcast.add_episodes_from_scrape(podcast.show_page_url)
+      end	
+    end 
 
 
 end

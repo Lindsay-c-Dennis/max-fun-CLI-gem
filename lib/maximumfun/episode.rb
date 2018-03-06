@@ -1,7 +1,12 @@
 class Episode
-  attr_accessor :podcast, :title, :description
+  attr_accessor :title, :description, :podcast
 
   @@all = []
+  
+  def podcast=(podcast)
+  	@podcast = podcast
+  	podcast.add_episode(self)
+  end
 
   def initialize(episode_hash)
   	episode_hash.each do |key, value|
@@ -9,7 +14,7 @@ class Episode
   	end
   	@@all << self
 
-  def self.new_from_episode_hash(episode_list)
+  def self.new_from_episode_list(episode_list)
   	episode_list.each do |episode_hash|
   	  Episode.new(episode_hash)
   	  @@all << self
