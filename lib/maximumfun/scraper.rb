@@ -21,10 +21,14 @@ class Scraper
 
   def self.scrape_show_page(show_page_url)
   	show_page = Nokogiri::HTML(open(show_page_url))
-  	episode_title = show_page.css("#node-38315 h2 a").text
-  	episode_description = show_page.css("#node-38315 p").text
-  	puts episode_title
-  	puts episode_description
+  	episode_list = []
+  	podcast_name = show_page.xpath('//*[@id="squeeze"]/h2').text
+  	show_page.css(".view-content .node").each do |node|
+        episode_title = node.css("h2 a").text
+  	    episode_description = node.css("p").text
+  	    episode_list << {title: episode_title, description: episode_description, podcast: podcast_name}
+  	 end
+  	 episode_list
   end
 
   self.scrape_show_page("http://www.maximumfun.org/shows/adventure-zone")

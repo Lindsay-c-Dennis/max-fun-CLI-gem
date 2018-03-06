@@ -2,7 +2,7 @@
 class CLI
 
   def call
-    
+    make_podcasts
     puts "Welcome to the Maximum Fun Comedy Podcast Inventory!"
     start
   end
@@ -40,22 +40,22 @@ class CLI
 
   def print_podcast_list
   	Podcast.all.each.with_index(1) do |podcast, i|
-  		puts "#{i}. #{podcast.name} - #{podcast.host}"
+  		puts "#{i}. #{podcast.title} - #{podcast.host}"
   	end
   end		
 
   def print_podcast(podcast)
-    puts "#{podcast.name} - #{podcast.host}"
+    puts "#{podcast.title} - #{podcast.host}"
     puts "#{podcast.description}"
     puts ""
-    puts "Here's a description of the latest episode:"
-    puts "#{podcast.latest_episode_title} - #{podcast.latest_episode_description}"
-    puts "Visit the show page at #{podcast.show_page_url}"
+    #puts "Here's a description of the latest episode:"
+    #puts "#{podcast.latest_episode_title} - #{podcast.latest_episode_description}"
+    #puts "Visit the show page at #{podcast.show_page_url}"
   end
   
   def make_podcasts
-  	podcasts_hash = Scraper.scrape_list_page("http://www.maximumfun.org/shows/comedy")
-  	Podcast.create_from_scrape(podcast_hash)
+  	podcast_array = Scraper.scrape_list_page("http://www.maximumfun.org/shows/comedy")
+  	Podcast.create_from_scrape(podcast_array)
   end
 
 

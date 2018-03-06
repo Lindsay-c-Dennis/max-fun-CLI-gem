@@ -1,12 +1,12 @@
 class Podcast
-  attr_accessor :title, :host, :latest_episode_title, :description, :latest_episode_description, :show_page_url 
-    @@all = []
+  attr_accessor :title, :host, :description, :show_page_url 
+  @@all = []
 
   def initialize(podcast_hash)
   	podcast_hash.each do |key,value|
       self.send("#{key}=", value)
-      @@all << self
     end
+    @@all << self
   end
 
   def self.create_from_scrape(podcast_array)
@@ -16,8 +16,20 @@ class Podcast
     end
   end
 
+  def title=(title)
+  	@title = title
+  end
+
+  def title
+  	@title
+  end
+  
+  def self.find(input)
+    self.all[input - 1]
+  end
 
   def self.all
   	@@all 
-  end	
+  end
+
 end
