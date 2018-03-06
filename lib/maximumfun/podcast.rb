@@ -8,6 +8,7 @@ class Podcast
   	podcast_hash.each do |key,value|
       self.send("#{key}=", value)
     end
+    @episodes = []
     @@all << self
   end
 
@@ -25,5 +26,16 @@ class Podcast
   def self.all
     @@all 
   end
+  
+  def self.print_podcasts
+  	puts self.all 
+  end
 
+  def add_episode(episode)
+    episode.podcast = self
+    @episodes << episode 
+  end
+  
+  
+  
 end

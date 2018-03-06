@@ -16,7 +16,8 @@ class Scraper
   		    podcasts << {title: podcast_title, host: podcast_host, description: podcast_description, show_page_url: "http://www.maximumfun.org"+podcast_url}
   		end
   	end
-    podcasts 	
+    podcasts
+  	
   end
 
   def self.scrape_show_page(show_page_url)
@@ -26,9 +27,9 @@ class Scraper
   	show_page.css(".view-content .node").each do |node|
         episode_title = node.css("h2 a").text
   	    episode_description = node.css("p").text
-  	    episode_list << {title: episode_title, description: episode_description, podcast: podcast_name}
+  	    episode_list << {episode_title: episode_title, description: episode_description, podcast: podcast_name}
   	 end
   	 episode_list
   end
-
+  
 end
