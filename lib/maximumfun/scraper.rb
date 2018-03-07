@@ -4,6 +4,8 @@ require 'open-uri'
 
 class Scraper
   
+  #scrapes info from index page, iterates through each podcast node and pulls out title, host, 
+  #description, and url, and returns these values in an array of hashes
   def self.scrape_list_page(index_url)
   	list_page = Nokogiri::HTML(open(index_url))
   	podcasts = []
@@ -20,7 +22,8 @@ class Scraper
     podcasts
   	
   end
-
+  
+  #scrapes information from an individual show page to get latest episode name
   def self.scrape_show_page(show_page_url)
   	show = {}
   	show_page = Nokogiri::HTML(open(show_page_url))

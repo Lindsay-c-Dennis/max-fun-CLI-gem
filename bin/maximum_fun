@@ -2,6 +2,6 @@
 
 require_relative '../lib/maximumfun'
 
-
+#creates a new instance of the CLI class and invokes the call method to start the program
 CLI.new.call
 

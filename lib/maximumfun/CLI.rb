@@ -1,6 +1,6 @@
 
 class CLI
-
+  #welcomes user, calls methods to scrape website, calls method to start program
   def call
   	
   	puts "  ________________________________________________________________________"
@@ -21,6 +21,7 @@ class CLI
     start
   end
 
+  #prints list of podcasts
   def start
   	puts ""
   	puts "Here are the current Maximum Fun Comedy podcasts:"
@@ -30,7 +31,8 @@ class CLI
     puts ""
     more_info
   end	
-
+  
+  #ask for user input to either look at an item in greater detail, exit, or loop to beginning if input is invalid, includes easter egg
   def more_info
   	puts "Which podcast would you like to know more about?"
   	input = gets.strip
@@ -59,7 +61,7 @@ class CLI
   	end    
   end  
   	 
-
+  #restart search process or exit program, depending on user input
   def restart
     puts "Would you like to search another podcast? Y/n"
     input = gets.strip.upcase 
@@ -72,14 +74,16 @@ class CLI
     	restart
     end 
   end   	
-
+  
+  #print a numbered list of podcasts
   def print_podcast_list
   	Podcast.all.each.with_index(1) do |podcast, i|
   		puts "#{i}. #{podcast.title} - #{podcast.host}"
   		sleep(0.2)
   	end
   end		
-
+  
+  #print data about the selected podcast
   def print_podcast(podcast)
     puts ""
     puts "#{podcast.title} - #{podcast.host}"
@@ -93,11 +97,13 @@ class CLI
     restart
   end
   
+  #use Scraper class to get information from website and create new instances of the Podcast class
   def make_podcasts
   	podcast_array = Scraper.scrape_list_page("http://www.maximumfun.org/shows/comedy")
   	Podcast.create_from_scrape(podcast_array)
   end
 
+  #use Scraper class to add latest episode name to each instance of the Podcast class
   def add_episode_to_podcasts
   	Podcast.all.each do |podcast|
       show_hash = Scraper.scrape_show_page(podcast.show_page_url)
