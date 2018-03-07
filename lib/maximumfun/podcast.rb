@@ -26,19 +26,13 @@ class Podcast
   def self.all
     @@all 
   end
-  
-  def self.print_podcasts
-  	@@all.each do |podcast|
-  		puts "#{podcast.title} - #{podcast.host}"
-  	end
-  end
 
   def add_episode(episode)
     episode.podcast = self
     @episodes << episode 
   end
   
-  def add_episodes_from_scrape(show_page_url)
+  def add_episodes_from_scrape
     episode_array = Scraper.scrape_show_page(show_page_url) 
     episode = Episode.new_from_episode_list(episode_array)
     @episodes << episode

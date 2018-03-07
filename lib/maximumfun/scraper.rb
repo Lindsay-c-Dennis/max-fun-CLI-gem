@@ -14,6 +14,7 @@ class Scraper
   		    podcast_description = podcast.css("p")[2].text
   		    podcast_url = podcast.css("h3 a").attr('href').value
   		    podcasts << {title: podcast_title, host: podcast_host, description: podcast_description, show_page_url: "http://www.maximumfun.org"+podcast_url}
+  		
   		end
   	end
     podcasts
@@ -21,16 +22,22 @@ class Scraper
   end
 
   def self.scrape_show_page(show_page_url)
+  	show = {}
   	show_page = Nokogiri::HTML(open(show_page_url))
-  	episode_list = []
-  	podcast_name = show_page.xpath('//*[@id="squeeze"]/h2').text
-  	show_page.css(".view-content .node").each do |node|
-        episode_title = node.css("h2 a").text
-  	    episode_description = node.css("p").text
-  	    episode_list << {title: episode_title, description: episode_description, podcast: podcast_name}
-  	 end
-  	 episode_list
+  	show[:latest_episode_name] = show_page.xpath('//*[@id="node-38315"]/h2/a').text
+  	show[:latest_episode_synopsis] = show_page.xpath('//*[@id="node-38315"]/div[3]/p').text
+    puts show
   end
+  	
+
+
+#  	episode_list = []
+#  	podcast_name = show_page.xpath('//*[@id="squeeze"]/h2').text
+#  	show_page.css(".view-content .node").each do |node|
+#        episode_title = node.css("h2 a").text
+#  	    episode_description = node.css("p").text
+#  	 episode_list
+#  end
  
-# Scraper.scrape_list_page("http://www.maximumfun.org/shows/comedy") 
+ Scraper.scrape_show_page("http://www.maximumfun.org/shows/adventure-zone") 
 end

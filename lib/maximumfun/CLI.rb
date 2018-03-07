@@ -3,7 +3,6 @@ class CLI
 
   def call
   	make_podcasts
-  	make_episodes
   	puts "  ________________________________________________________________________"
   	puts " /                                                                        \\ "
   	puts "|    __  __            _                             ______           _    |"
@@ -54,10 +53,12 @@ class CLI
   end   	
   
   def print_episode_list(podcast)
-    podcast.episodes.each.with_index(1) do |episode, i|
-    	binding.pry
-    	puts "#{i} - #{episode.title}"
-    	puts "#{episode.description}" 
+    episode_list = Scraper.scrape_show_page(podcast.show_page_url)
+    
+    	episode_list.each.with_index(1) do |episode, i|
+    	  puts "#{i} - #{episode[title]}"
+    	  puts "#{episode[description]}"
+    	#end 
   	end
   end
 
@@ -89,10 +90,11 @@ class CLI
   	Podcast.create_from_scrape(podcast_array)
   end
 
-  def make_episodes
-    Podcast.all.each do |podcast|
-      podcast.add_episodes_from_scrape(podcast.show_page_url)
-    end	
-  end 
+ # def make_episodes
+ #   Podcast.all.each do |podcast|
+ #     episode_list = Scraper.scrape_show_page(podcast.show_page_url)
+  #    Episode.new_from_episode_list(episode_list)
+  #  end	
+ # end 
 end
 
