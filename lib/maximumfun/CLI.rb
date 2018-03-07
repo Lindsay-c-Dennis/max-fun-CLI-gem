@@ -85,15 +85,9 @@ class CLI
   def add_episode_to_podcasts
   	Podcast.all.each do |podcast|
       show_hash = Scraper.scrape_show_page(podcast.show_page_url)
-  	  podcast.add_episode_details(show_hash)
+  	  podcast.add_episode_name(show_hash)
   	end
   end
 
- # def make_episodes
- #   Podcast.all.each do |podcast|
- #     episode_list = Scraper.scrape_show_page(podcast.show_page_url)
-  #    Episode.new_from_episode_list(episode_list)
-  #  end	
- # end 
 end
 

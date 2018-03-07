@@ -25,7 +25,6 @@ class Scraper
   	show = {}
   	show_page = Nokogiri::HTML(open(show_page_url))
   	show[:latest_episode_name] = show_page.css('.node h2 a')[0].text
-    
     show
   end
 
