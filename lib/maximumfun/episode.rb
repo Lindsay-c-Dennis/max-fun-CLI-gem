@@ -16,8 +16,8 @@ class Episode
 
   def self.new_from_episode_list(episode_list)
   	episode_list.each do |episode_hash|
-  	  Episode.new(episode_hash)
-  	  @@all << self
+  	  episode = Episode.new(episode_hash)
+  	  @@all << episode
   	  end
   	end
   end

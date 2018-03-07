@@ -31,5 +31,6 @@ class Scraper
   	 end
   	 episode_list
   end
-  
+ 
+# Scraper.scrape_list_page("http://www.maximumfun.org/shows/comedy") 
 end

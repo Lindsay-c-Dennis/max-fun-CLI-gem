@@ -1,13 +1,14 @@
 require 'pry'
 
 class Podcast
-  attr_accessor :host, :description, :show_page_url, :title, :episodes 
+  attr_accessor :host, :description, :show_page_url, :title, :episodes
+
   @@all = []
 
   def initialize(podcast_hash)
-  	podcast_hash.each do |key,value|
-      self.send("#{key}=", value)
-    end
+  	podcast_hash.each do |key, value|
+  		self.send("#{key}=", value)
+  	end
     @@all << self
     @episodes = []
   end
@@ -15,7 +16,6 @@ class Podcast
   def self.create_from_scrape(podcast_array)
   	podcast_array.each do |podcast_hash|
        Podcast.new(podcast_hash)
-       @@all << self
     end
   end
   
@@ -28,7 +28,9 @@ class Podcast
   end
   
   def self.print_podcasts
-  	puts self.all 
+  	@@all.each do |podcast|
+  		puts "#{podcast.title} - #{podcast.host}"
+  	end
   end
 
   def add_episode(episode)
@@ -38,7 +40,7 @@ class Podcast
   
   def add_episodes_from_scrape(show_page_url)
     episode_array = Scraper.scrape_show_page(show_page_url) 
-    Episode.new_from_episode_list(episode_array)
-    @episodes << self
+    episode = Episode.new_from_episode_list(episode_array)
+    @episodes << episode
   end
 end
