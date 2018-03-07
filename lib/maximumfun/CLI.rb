@@ -51,7 +51,7 @@ class CLI
     elsif input.to_i.between?(1,32)
   		podcast = Podcast.find(input.to_i)
   	    print_podcast(podcast)    
-  	elsif input == "exit"
+  	elsif input.downcase == "exit"
   		puts "Thanks for stopping by!"
   	else
   	    puts "I didn't quite catch that. Try again?"
@@ -65,8 +65,11 @@ class CLI
     input = gets.strip.upcase 
     if input == "Y" || input == "YES"
       start
-    else 
+    elsif input == "N" || input == "NO" || input == "EXIT"
       puts "See ya later!"
+    else
+    	puts "What was that?"
+    	restart
     end 
   end   	
 
