@@ -24,11 +24,12 @@ class Scraper
   def self.scrape_show_page(show_page_url)
   	show = {}
   	show_page = Nokogiri::HTML(open(show_page_url))
-  	show[:latest_episode_name] = show_page.xpath('//*[@id="node-38315"]/h2/a').text
-  	show[:latest_episode_synopsis] = show_page.xpath('//*[@id="node-38315"]/div[3]/p').text
-    puts show
+  	show[:latest_episode_name] = show_page.css('.node h2 a')[0].text
+  	show[:latest_episode_synopsis] = show_page.xpath('//*[@class="node"]/div[3]/p/text()')[0].text
+    binding.pry
+    show
   end
-  	
+
 
 
 #  	episode_list = []
@@ -39,5 +40,5 @@ class Scraper
 #  	 episode_list
 #  end
  
- Scraper.scrape_show_page("http://www.maximumfun.org/shows/adventure-zone") 
+ Scraper.scrape_show_page("http://www.maximumfun.org/shows/baby-geniuses") 
 end
