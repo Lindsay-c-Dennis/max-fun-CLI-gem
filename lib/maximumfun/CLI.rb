@@ -24,7 +24,7 @@ class CLI
   def start
   	puts ""
   	puts "Here are the current Maximum Fun Comedy podcasts:"
-  	sleep(1.5)
+  	sleep(1)
   	puts ""
   	print_podcast_list 
     puts ""
@@ -36,15 +36,16 @@ class CLI
   	input = gets.strip
 
   	if input == "14"
-  		puts "       _.-._   "
-        puts "      | | | |_ "
-        puts "      | | | | |"
-        puts "      | | | | |"
-        puts "    _ |  '-._ |"
-        puts "  \\`\\`-.'-._;"
-        puts "    \\    '   |"
-        puts "     \\  .`  / "
-        puts "       |    |  "  
+  		puts "                                                                        _.-._   "
+        puts "   #####                                      #               ###      | | | |_ "
+        puts "  #     # #####  ######   ##   #####          #  ####  #####  ###      | | | | |"
+        puts "  #       #    # #       #  #    #            # #    # #    # ###      | | | | |"
+        puts "  #  #### #    # #####  #    #   #            # #    # #####   #     _ |  '-._ |"
+        puts "  #     # #####  #      ######   #      #     # #    # #    #        \\`\\`-.'-._;"
+        puts "  #     # #   #  #      #    #   #      #     # #    # #    # ###     \\    '   |"
+        puts "   #####  #    # ###### #    #   #       #####   ####  #####  ###      \\  .`  / "
+        puts "                                                                        |    |  "  
+        sleep(1)
         podcast = Podcast.find(14)
         print_podcast(podcast)
     elsif input.to_i.between?(1,32)
