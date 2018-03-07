@@ -25,8 +25,7 @@ class Scraper
   	show = {}
   	show_page = Nokogiri::HTML(open(show_page_url))
   	show[:latest_episode_name] = show_page.css('.node h2 a')[0].text
-  	show[:latest_episode_synopsis] = show_page.xpath('//*[@class="node"]/div[3]/p/text()')[0].text
-    binding.pry
+    
     show
   end
 
@@ -40,5 +39,5 @@ class Scraper
 #  	 episode_list
 #  end
  
- Scraper.scrape_show_page("http://www.maximumfun.org/shows/baby-geniuses") 
+ #Scraper.scrape_show_page("http://www.maximumfun.org/shows/baby-geniuses") 
 end

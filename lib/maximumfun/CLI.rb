@@ -15,6 +15,7 @@ class CLI
     puts " \\________________________________________________________________________/ "
     puts ""
     puts "              Welcome to the Maximum Fun Comedy Podcast Inventory!"
+    puts "                            Loading podcasts..."
     make_podcasts
   	add_episode_to_podcasts
     start
@@ -27,11 +28,22 @@ class CLI
   	puts ""
   	print_podcast_list 
     puts ""
+    more_info
+  end	
+
+  def more_info
   	puts "Which podcast would you like to know more about?"
   	input = gets.strip
 
-  	podcast = Podcast.find(input.to_i)
-  	print_podcast(podcast)
+  	if input.to_i.between?(1,32)
+  		podcast = Podcast.find(input.to_i)
+  	    print_podcast(podcast)
+  	elsif input == "exit"
+  		puts "Thanks for stopping by!"
+  	else
+  	    puts "I didn't quite catch that. Try again?"
+  	    more_info
+  	end    
   end  
   	 
 
@@ -44,25 +56,16 @@ class CLI
       puts "See ya later!"
     end 
   end   	
-  
-#  def print_episode_list(podcast)
-#    episode_list = Scraper.scrape_show_page(podcast.show_page_url)
-#    
-#    	episode_list.each.with_index(1) do |episode, i|
-#    	  puts "#{i} - #{episode[title]}"
-#    	  puts "#{episode[description]}"
-#    	#end 
-#  	end
-#  end
 
   def print_podcast_list
   	Podcast.all.each.with_index(1) do |podcast, i|
   		puts "#{i}. #{podcast.title} - #{podcast.host}"
-  		sleep(0.3)
+  		sleep(0.2)
   	end
   end		
 
   def print_podcast(podcast)
+    puts ""
     puts "#{podcast.title} - #{podcast.host}"
     puts ""
     puts "#{podcast.description}"
@@ -83,7 +86,6 @@ class CLI
   	Podcast.all.each do |podcast|
       show_hash = Scraper.scrape_show_page(podcast.show_page_url)
   	  podcast.add_episode_details(show_hash)
-  	  #puts show_hash
   	end
   end
 
