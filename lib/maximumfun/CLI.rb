@@ -35,9 +35,21 @@ class CLI
   	puts "Which podcast would you like to know more about?"
   	input = gets.strip
 
-  	if input.to_i.between?(1,32)
+  	if input == "14"
+  		puts "       _.-._   "
+        puts "      | | | |_ "
+        puts "      | | | | |"
+        puts "      | | | | |"
+        puts "    _ |  '-._ |"
+        puts "  \\`\\`-.'-._;"
+        puts "    \\    '   |"
+        puts "     \\  .`  / "
+        puts "       |    |  "  
+        podcast = Podcast.find(14)
+        print_podcast(podcast)
+    elsif input.to_i.between?(1,32)
   		podcast = Podcast.find(input.to_i)
-  	    print_podcast(podcast)
+  	    print_podcast(podcast)    
   	elsif input == "exit"
   		puts "Thanks for stopping by!"
   	else

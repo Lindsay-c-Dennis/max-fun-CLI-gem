@@ -28,15 +28,4 @@ class Scraper
     show
   end
 
-
-
-#  	episode_list = []
-#  	podcast_name = show_page.xpath('//*[@id="squeeze"]/h2').text
-#  	show_page.css(".view-content .node").each do |node|
-#        episode_title = node.css("h2 a").text
-#  	    episode_description = node.css("p").text
-#  	 episode_list
-#  end
- 
- #Scraper.scrape_show_page("http://www.maximumfun.org/shows/baby-geniuses") 
 end
